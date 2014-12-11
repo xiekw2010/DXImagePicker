@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BE155B011A37E7DA008486DA /* DXImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = BE155B001A37E7DA008486DA /* DXImagePicker.m */; };
 		BE155B041A37EEF9008486DA /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE155B031A37EEF9008486DA /* AssetsLibrary.framework */; };
 		BE155B071A37F0BD008486DA /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE155B061A37F0BD008486DA /* HomeViewController.m */; };
-		BE36B0211A380FA00029FBDE /* DXPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE36B0201A380FA00029FBDE /* DXPhotoCollectionViewCell.m */; };
-		BE36B0251A38165E0029FBDE /* DXPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = BE36B0241A38165E0029FBDE /* DXPopover.m */; };
-		BE6FDD6D1A394EB7000BFDA5 /* DXUtilViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6FDD6C1A394EB7000BFDA5 /* DXUtilViews.m */; };
-		BE6FDD6F1A3966F7000BFDA5 /* DXImagePickerImage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BE6FDD6E1A3966F7000BFDA5 /* DXImagePickerImage.bundle */; };
+		BE640A8D1A399BFB00761C38 /* DXImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = BE640A841A399BFB00761C38 /* DXImagePicker.m */; };
+		BE640A8E1A399BFB00761C38 /* DXImagePickerImage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BE640A851A399BFB00761C38 /* DXImagePickerImage.bundle */; };
+		BE640A8F1A399BFB00761C38 /* DXPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE640A871A399BFB00761C38 /* DXPhotoCollectionViewCell.m */; };
+		BE640A901A399BFB00761C38 /* DXPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = BE640A8A1A399BFB00761C38 /* DXPopover.m */; };
+		BE640A941A399C2900761C38 /* DXUtilViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BE640A931A399C2900761C38 /* DXUtilViews.m */; };
 		BE7FCA8C1A37E782005C64F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7FCA8B1A37E782005C64F0 /* Foundation.framework */; };
 		BE7FCA8E1A37E782005C64F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7FCA8D1A37E782005C64F0 /* CoreGraphics.framework */; };
 		BE7FCA901A37E782005C64F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7FCA8F1A37E782005C64F0 /* UIKit.framework */; };
@@ -39,18 +39,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BE155AFF1A37E7DA008486DA /* DXImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXImagePicker.h; sourceTree = "<group>"; };
-		BE155B001A37E7DA008486DA /* DXImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXImagePicker.m; sourceTree = "<group>"; };
 		BE155B031A37EEF9008486DA /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AssetsLibrary.framework; sourceTree = DEVELOPER_DIR; };
 		BE155B051A37F0BD008486DA /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		BE155B061A37F0BD008486DA /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		BE36B01F1A380FA00029FBDE /* DXPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXPhotoCollectionViewCell.h; sourceTree = "<group>"; };
-		BE36B0201A380FA00029FBDE /* DXPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXPhotoCollectionViewCell.m; sourceTree = "<group>"; };
-		BE36B0231A38165E0029FBDE /* DXPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXPopover.h; sourceTree = "<group>"; };
-		BE36B0241A38165E0029FBDE /* DXPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXPopover.m; sourceTree = "<group>"; };
-		BE6FDD6B1A394EB7000BFDA5 /* DXUtilViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXUtilViews.h; path = DXPopover/DXUtilViews.h; sourceTree = "<group>"; };
-		BE6FDD6C1A394EB7000BFDA5 /* DXUtilViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXUtilViews.m; path = DXPopover/DXUtilViews.m; sourceTree = "<group>"; };
-		BE6FDD6E1A3966F7000BFDA5 /* DXImagePickerImage.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DXImagePickerImage.bundle; sourceTree = "<group>"; };
+		BE640A831A399BFB00761C38 /* DXImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXImagePicker.h; sourceTree = "<group>"; };
+		BE640A841A399BFB00761C38 /* DXImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXImagePicker.m; sourceTree = "<group>"; };
+		BE640A851A399BFB00761C38 /* DXImagePickerImage.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DXImagePickerImage.bundle; sourceTree = "<group>"; };
+		BE640A861A399BFB00761C38 /* DXPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXPhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		BE640A871A399BFB00761C38 /* DXPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXPhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		BE640A891A399BFB00761C38 /* DXPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXPopover.h; sourceTree = "<group>"; };
+		BE640A8A1A399BFB00761C38 /* DXPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXPopover.m; sourceTree = "<group>"; };
+		BE640A921A399C2900761C38 /* DXUtilViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXUtilViews.h; sourceTree = "<group>"; };
+		BE640A931A399C2900761C38 /* DXUtilViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXUtilViews.m; sourceTree = "<group>"; };
 		BE7FCA881A37E782005C64F0 /* DXPhotoSelectBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DXPhotoSelectBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE7FCA8B1A37E782005C64F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BE7FCA8D1A37E782005C64F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -94,26 +94,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BE155AFE1A37E7B5008486DA /* Vendor */ = {
+		BE640A821A399BFB00761C38 /* DXImagePicker */ = {
 			isa = PBXGroup;
 			children = (
-				BE36B0221A38165E0029FBDE /* DXPopover */,
-				BE155AFF1A37E7DA008486DA /* DXImagePicker.h */,
-				BE155B001A37E7DA008486DA /* DXImagePicker.m */,
-				BE36B01F1A380FA00029FBDE /* DXPhotoCollectionViewCell.h */,
-				BE36B0201A380FA00029FBDE /* DXPhotoCollectionViewCell.m */,
-				BE6FDD6B1A394EB7000BFDA5 /* DXUtilViews.h */,
-				BE6FDD6C1A394EB7000BFDA5 /* DXUtilViews.m */,
-				BE6FDD6E1A3966F7000BFDA5 /* DXImagePickerImage.bundle */,
+				BE640A831A399BFB00761C38 /* DXImagePicker.h */,
+				BE640A841A399BFB00761C38 /* DXImagePicker.m */,
+				BE640A861A399BFB00761C38 /* DXPhotoCollectionViewCell.h */,
+				BE640A871A399BFB00761C38 /* DXPhotoCollectionViewCell.m */,
+				BE640A921A399C2900761C38 /* DXUtilViews.h */,
+				BE640A931A399C2900761C38 /* DXUtilViews.m */,
+				BE640A851A399BFB00761C38 /* DXImagePickerImage.bundle */,
+				BE640A881A399BFB00761C38 /* DXPopover */,
 			);
-			path = Vendor;
+			path = DXImagePicker;
 			sourceTree = "<group>";
 		};
-		BE36B0221A38165E0029FBDE /* DXPopover */ = {
+		BE640A881A399BFB00761C38 /* DXPopover */ = {
 			isa = PBXGroup;
 			children = (
-				BE36B0231A38165E0029FBDE /* DXPopover.h */,
-				BE36B0241A38165E0029FBDE /* DXPopover.m */,
+				BE640A891A399BFB00761C38 /* DXPopover.h */,
+				BE640A8A1A399BFB00761C38 /* DXPopover.m */,
 			);
 			path = DXPopover;
 			sourceTree = "<group>";
@@ -152,7 +152,7 @@
 		BE7FCA911A37E782005C64F0 /* DXPhotoSelectBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				BE155AFE1A37E7B5008486DA /* Vendor */,
+				BE640A821A399BFB00761C38 /* DXImagePicker */,
 				BE7FCA9A1A37E782005C64F0 /* DXAppDelegate.h */,
 				BE7FCA9B1A37E782005C64F0 /* DXAppDelegate.m */,
 				BE155B051A37F0BD008486DA /* HomeViewController.h */,
@@ -268,7 +268,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE6FDD6F1A3966F7000BFDA5 /* DXImagePickerImage.bundle in Resources */,
+				BE640A8E1A399BFB00761C38 /* DXImagePickerImage.bundle in Resources */,
 				BE7FCA961A37E782005C64F0 /* InfoPlist.strings in Resources */,
 				BE7FCA9E1A37E782005C64F0 /* Images.xcassets in Resources */,
 			);
@@ -291,11 +291,11 @@
 			files = (
 				BE7FCA9C1A37E782005C64F0 /* DXAppDelegate.m in Sources */,
 				BE7FCA981A37E782005C64F0 /* main.m in Sources */,
-				BE155B011A37E7DA008486DA /* DXImagePicker.m in Sources */,
 				BE155B071A37F0BD008486DA /* HomeViewController.m in Sources */,
-				BE36B0211A380FA00029FBDE /* DXPhotoCollectionViewCell.m in Sources */,
-				BE6FDD6D1A394EB7000BFDA5 /* DXUtilViews.m in Sources */,
-				BE36B0251A38165E0029FBDE /* DXPopover.m in Sources */,
+				BE640A8D1A399BFB00761C38 /* DXImagePicker.m in Sources */,
+				BE640A8F1A399BFB00761C38 /* DXPhotoCollectionViewCell.m in Sources */,
+				BE640A941A399C2900761C38 /* DXUtilViews.m in Sources */,
+				BE640A901A399BFB00761C38 /* DXPopover.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
