@@ -12,6 +12,8 @@
 		BE155B071A37F0BD008486DA /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE155B061A37F0BD008486DA /* HomeViewController.m */; };
 		BE36B0211A380FA00029FBDE /* DXPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE36B0201A380FA00029FBDE /* DXPhotoCollectionViewCell.m */; };
 		BE36B0251A38165E0029FBDE /* DXPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = BE36B0241A38165E0029FBDE /* DXPopover.m */; };
+		BE6FDD6D1A394EB7000BFDA5 /* DXUtilViews.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6FDD6C1A394EB7000BFDA5 /* DXUtilViews.m */; };
+		BE6FDD6F1A3966F7000BFDA5 /* DXImagePickerImage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BE6FDD6E1A3966F7000BFDA5 /* DXImagePickerImage.bundle */; };
 		BE7FCA8C1A37E782005C64F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7FCA8B1A37E782005C64F0 /* Foundation.framework */; };
 		BE7FCA8E1A37E782005C64F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7FCA8D1A37E782005C64F0 /* CoreGraphics.framework */; };
 		BE7FCA901A37E782005C64F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7FCA8F1A37E782005C64F0 /* UIKit.framework */; };
@@ -24,8 +26,6 @@
 		BE7FCAA71A37E782005C64F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7FCA8F1A37E782005C64F0 /* UIKit.framework */; };
 		BE7FCAAF1A37E782005C64F0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE7FCAAD1A37E782005C64F0 /* InfoPlist.strings */; };
 		BE7FCAB11A37E782005C64F0 /* DXPhotoSelectBrowserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7FCAB01A37E782005C64F0 /* DXPhotoSelectBrowserTests.m */; };
-		BED725C81A382FCD00451C9C /* camera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED725C61A382FCD00451C9C /* camera@3x.png */; };
-		BED725C91A382FCD00451C9C /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED725C71A382FCD00451C9C /* camera@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +48,9 @@
 		BE36B0201A380FA00029FBDE /* DXPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXPhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		BE36B0231A38165E0029FBDE /* DXPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXPopover.h; sourceTree = "<group>"; };
 		BE36B0241A38165E0029FBDE /* DXPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXPopover.m; sourceTree = "<group>"; };
+		BE6FDD6B1A394EB7000BFDA5 /* DXUtilViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DXUtilViews.h; path = DXPopover/DXUtilViews.h; sourceTree = "<group>"; };
+		BE6FDD6C1A394EB7000BFDA5 /* DXUtilViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DXUtilViews.m; path = DXPopover/DXUtilViews.m; sourceTree = "<group>"; };
+		BE6FDD6E1A3966F7000BFDA5 /* DXImagePickerImage.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DXImagePickerImage.bundle; sourceTree = "<group>"; };
 		BE7FCA881A37E782005C64F0 /* DXPhotoSelectBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DXPhotoSelectBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE7FCA8B1A37E782005C64F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BE7FCA8D1A37E782005C64F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -64,8 +67,6 @@
 		BE7FCAAC1A37E782005C64F0 /* DXPhotoSelectBrowserTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DXPhotoSelectBrowserTests-Info.plist"; sourceTree = "<group>"; };
 		BE7FCAAE1A37E782005C64F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BE7FCAB01A37E782005C64F0 /* DXPhotoSelectBrowserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DXPhotoSelectBrowserTests.m; sourceTree = "<group>"; };
-		BED725C61A382FCD00451C9C /* camera@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@3x.png"; sourceTree = "<group>"; };
-		BED725C71A382FCD00451C9C /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +102,9 @@
 				BE155B001A37E7DA008486DA /* DXImagePicker.m */,
 				BE36B01F1A380FA00029FBDE /* DXPhotoCollectionViewCell.h */,
 				BE36B0201A380FA00029FBDE /* DXPhotoCollectionViewCell.m */,
-				BED725C61A382FCD00451C9C /* camera@3x.png */,
-				BED725C71A382FCD00451C9C /* camera@2x.png */,
+				BE6FDD6B1A394EB7000BFDA5 /* DXUtilViews.h */,
+				BE6FDD6C1A394EB7000BFDA5 /* DXUtilViews.m */,
+				BE6FDD6E1A3966F7000BFDA5 /* DXImagePickerImage.bundle */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -266,10 +268,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE6FDD6F1A3966F7000BFDA5 /* DXImagePickerImage.bundle in Resources */,
 				BE7FCA961A37E782005C64F0 /* InfoPlist.strings in Resources */,
 				BE7FCA9E1A37E782005C64F0 /* Images.xcassets in Resources */,
-				BED725C81A382FCD00451C9C /* camera@3x.png in Resources */,
-				BED725C91A382FCD00451C9C /* camera@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +294,7 @@
 				BE155B011A37E7DA008486DA /* DXImagePicker.m in Sources */,
 				BE155B071A37F0BD008486DA /* HomeViewController.m in Sources */,
 				BE36B0211A380FA00029FBDE /* DXPhotoCollectionViewCell.m in Sources */,
+				BE6FDD6D1A394EB7000BFDA5 /* DXUtilViews.m in Sources */,
 				BE36B0251A38165E0029FBDE /* DXPopover.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,7 +371,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "BD778C99-598D-4BFD-A8CE-A15411E40EBD";
+				PROVISIONING_PROFILE = "16eeb6d2-4917-4b7a-8859-277910dda678";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -402,7 +404,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PROVISIONING_PROFILE = "BD778C99-598D-4BFD-A8CE-A15411E40EBD";
+				PROVISIONING_PROFILE = "16eeb6d2-4917-4b7a-8859-277910dda678";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -414,7 +416,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: App Channel Limited";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -431,7 +433,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: App Channel Limited";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

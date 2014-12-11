@@ -17,7 +17,6 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         self.textAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:[UIFont systemFontOfSize:10.0]};
-        self.normalColor = [UIColor colorWithRed:0.06 green:0.51 blue:1.00 alpha:1.00];
     }
     return self;
 }
