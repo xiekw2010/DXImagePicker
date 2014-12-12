@@ -22,19 +22,22 @@ static NSString * const CameraButton = @"CameraButton";
     BOOL _shouldPreLoadIndex;
     NSInteger _shouldSelectAlbumIndex;
     ALAssetsGroup *_cameraGroup;
+    BOOL _isUpdatingAlbums;
 }
 
 @property (nonatomic, strong) ALAssetsLibrary *assetLibrary;
-@property (nonatomic, strong) NSMutableArray *albums; // the array of ALAssetsGroup;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ALAssetsGroup *currentAlbum;
 @property (nonatomic, strong) TriangleButton *titleButton;
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) NSMutableDictionary *albumsAssetMap;
 @property (nonatomic, strong) DXPopover *popover;
-@property (nonatomic, strong) NSMutableArray *selectedAssets;
-@property (nonatomic, strong) NSMutableDictionary *selectedOrderMap;
 @property (nonatomic, assign) NSInteger loadAssetCounter;
+
+@property (nonatomic, strong) NSMutableArray *albums; // the array of ALAssetsGroup;
+@property (nonatomic, strong) NSMutableArray *selectedAssets;
+@property (nonatomic, strong) NSMutableDictionary *albumsAssetMap;
+@property (nonatomic, strong) NSMutableDictionary *selectedOrderMap;//@{assetName1:@(1), assetName2:@(2)}
+
 
 @end
 
@@ -102,9 +105,6 @@ static NSString * const CameraButton = @"CameraButton";
                      CGFloat tbHeight = MIN(275, [DXAlbumCell standHeight]*self.albums.count);
                      self.tableView.bounds = (CGRect){CGPointZero, CGSizeMake(CGRectGetWidth(self.view.bounds), tbHeight)};
                      
-                     // add the camera button into it
-                     
-                     
                  });
              }
              
@@ -120,10 +120,6 @@ static NSString * const CameraButton = @"CameraButton";
 
 - (void)_reload
 {
-    if ([self.delegate respondsToSelector:@selector(dx_imagePickerController:didSelectAlbumName:)]) {
-        [self.delegate dx_imagePickerController:self didSelectAlbumName:[self.currentAlbum valueForProperty:ALAssetsGroupPropertyName]];
-    }
-    
     [self.selectedAssets removeAllObjects];
     self.navigationItem.rightBarButtonItem.enabled = self.selectedAssets.count > 0;
     [self.titleButton setTitle:[self.currentAlbum valueForProperty:ALAssetsGroupPropertyName] forState:UIControlStateNormal];
@@ -135,6 +131,8 @@ static NSString * const CameraButton = @"CameraButton";
         if (indexOfCurrentKeyInAlums != NSNotFound) {
             [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:indexOfCurrentKeyInAlums inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
         }
+        
+        _shouldPreLoadIndex = NO;
         
         //Pre load collection view
         if (self.shouldSelectedAssetFileNames.count) {
@@ -150,67 +148,103 @@ static NSString * const CameraButton = @"CameraButton";
             [self.shouldSelectedAssetFileNames enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 
                 NSInteger shouldInexCurrentAlbumAssets = [nameIndexMap[obj] integerValue];
+           
                 if ([self _isCameraRoll]) {
                     shouldInexCurrentAlbumAssets += 1;
                 }
                 
-                [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:shouldInexCurrentAlbumAssets inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionBottom];
+                [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:shouldInexCurrentAlbumAssets inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionCenteredVertically];
                 [self collectionView:self.collectionView didSelectItemAtIndexPath:[NSIndexPath indexPathForRow:shouldInexCurrentAlbumAssets inSection:0]];
             }];
+            
+            self.shouldSelectedAssetFileNames = nil;
         }
     }
 }
 
-- (void)_reloadCurrentAlbum
+- (void)_reloadAblumAssets:(ALAssetsGroup *)ablum
 {
-    NSString *albumName = [self.currentAlbum valueForProperty:ALAssetsGroupPropertyName];
-    NSArray *currentArray = self.albumsAssetMap[albumName];
-    NSLog(@"Before reload album count is %lu", (unsigned long)currentArray.count);
-
+    NSString *albumName = [ablum valueForProperty:ALAssetsGroupPropertyName];
     
     NSMutableArray *array = [NSMutableArray array];
-    [self.currentAlbum enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+    [ablum enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
         if (!result) {
             return;
         }
         [array addObject:result];
     }];
-    
-    [self.currentAlbum enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 1)] options:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-        NSLog(@"index asset name is %@", [result valueForProperty:ALAssetPropertyAssetURL]);
-    }];
-    
-    if ([self _isCameraRoll]) {
+    if ([[ablum valueForProperty:ALAssetsGroupPropertyType] integerValue] == ALAssetsGroupSavedPhotos) {
         [array insertObject:CameraButton atIndex:0];
     }
-    NSLog(@"After reload album count is %lu", (unsigned long)array.count);
     self.albumsAssetMap[albumName] = array;
-    [self.collectionView reloadData];
+    [self.tableView reloadData];
+    
+    
+    if (ablum == self.currentAlbum) {
+        [self _updateSeletedAssets];
+        
+        _shouldPreLoadIndex = YES;
+        self.shouldSelectedAssetFileNames = [[self class] getAssetNamesByAssets:self.selectedAssets];
+        [self _reload];
+    }
 }
 
-- (void)_reloadScreenShot
+- (NSArray *)_updateSeletedAssets
 {
-    NSString *albumName = [_cameraGroup valueForProperty:ALAssetsGroupPropertyName];
-    NSMutableArray *currentArray = self.albumsAssetMap[albumName];
-    NSLog(@"Before reload album count is %lu", (unsigned long)currentArray.count);
+    NSSet *currentAssetNameSets = [NSSet setWithArray:[[self class] getAssetNamesByAssets:[self _currentAblumAssets]]];
+    NSArray *result = [self.selectedAssets filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(ALAsset *evaluatedObject, NSDictionary *bindings) {
+        NSString *fileName = [evaluatedObject defaultRepresentation].filename;
+        return [currentAssetNameSets containsObject:fileName] == NO;
+    }]];
     
-    [_cameraGroup enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:currentArray.count-2] options:0 usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-        if (!result) {
-            return;
-        }
-        [currentArray insertObject:result atIndex:1];
-    }];
+    NSArray *unNeedAssets = result;
+    for (ALAsset *asset in unNeedAssets) {
+        [self _removeSelectedAsset:asset];
+    }
+
+    return result;
+}
+
+- (void)_reloadCurrentAlbum:(NSNotification *)noti
+{
+    if (_isUpdatingAlbums) {
+        return;
+    }
+    NSLog(@"Noti is %@", noti.userInfo);
     
-    NSLog(@"After reload album count is %lu", (unsigned long)currentArray.count);
-    self.albumsAssetMap[albumName] = currentArray;
-    if ([self _isCameraRoll]) {
-        [self.collectionView reloadData];
+    NSDictionary *userInfo = noti.userInfo;
+    if (userInfo) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _isUpdatingAlbums = YES;
+            NSArray *ablumArray = userInfo[ALAssetLibraryUpdatedAssetGroupsKey];
+            if (ablumArray.count) {
+                NSMutableSet *set = [NSMutableSet setWithCapacity:self.albums.count];
+                for (ALAssetsGroup *group in self.albums) {
+                    [set addObject:[group valueForProperty:ALAssetsGroupPropertyURL]];
+                }
+                NSArray *result = [self.albums filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(ALAssetsGroup *evaluatedObject, NSDictionary *bindings) {
+                    NSString *URL = [evaluatedObject valueForProperty:ALAssetsGroupPropertyURL];
+                    return [set containsObject:URL];
+                }]];
+                
+                for (ALAssetsGroup *group in result) {
+                    [self _reloadAblumAssets:group];
+                }
+            }
+            _isUpdatingAlbums = NO;
+        });
     }
 }
 
 - (BOOL)_isCameraRoll
 {
     return  [[self.currentAlbum valueForProperty:ALAssetsGroupPropertyType] integerValue]==ALAssetsGroupSavedPhotos;
+}
+
+- (NSMutableArray *)_currentAblumAssets
+{
+    NSString *albumName = [self.currentAlbum valueForProperty:ALAssetsGroupPropertyName];
+    return self.albumsAssetMap[albumName];
 }
 
 - (void)_showAlbums
@@ -249,14 +283,43 @@ static NSString * const CameraButton = @"CameraButton";
     [self presentViewController:picker animated:YES completion:nil];
 }
 
-
-- (ALAsset *)_assetForIndexPath:(NSIndexPath *)indexPath
+- (void)_addSelectedAsset:(ALAsset *)asset
 {
-    NSString *key = [self.currentAlbum valueForProperty:ALAssetsGroupPropertyName];
-    NSArray *assets = self.albumsAssetMap[key];
-    return assets[indexPath.row];
+    NSString *assetName = [asset defaultRepresentation].filename;
+    [self.selectedAssets addObject:asset];
+    self.selectedOrderMap[assetName] = @(self.selectedAssets.count);
+
+    self.navigationItem.rightBarButtonItem.enabled = self.selectedAssets.count > 0;
 }
 
+- (void)_removeSelectedAsset:(ALAsset *)asset
+{
+    NSString *assetName = [asset defaultRepresentation].filename;
+    NSInteger index = [self.selectedOrderMap[assetName] integerValue];
+    if (index > 0) {
+        if (index < self.selectedAssets.count){
+            
+            //update visible cells
+            NSArray *visibleCells = [self.collectionView visibleCells];
+            for (DXPhotoCollectionViewCell *vcell in visibleCells) {
+                if (vcell.numberView.index > index) {
+                    vcell.numberView.index -= 1;
+                }
+            }
+            
+            //update selectMap
+            NSDictionary *copyDic = [self.selectedOrderMap copy];
+            [copyDic enumerateKeysAndObjectsUsingBlock:^(id key, NSNumber *number, BOOL *stop) {
+                if (number.integerValue > index) {
+                    self.selectedOrderMap[key] = @(number.integerValue-1);
+                }
+            }];
+        }
+        [self.selectedAssets removeObject:asset];
+        [self.selectedOrderMap removeObjectForKey:assetName];
+        self.navigationItem.rightBarButtonItem.enabled = self.selectedAssets.count > 0;
+    }
+}
 
 - (instancetype)init
 {
@@ -269,11 +332,9 @@ static NSString * const CameraButton = @"CameraButton";
         self.selectedOrderMap = [NSMutableDictionary dictionary];
         self.themeBlack = YES;
         self.maxSelectedCount = -1;
+    
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadCurrentAlbum:) name:ALAssetsLibraryChangedNotification object:nil];
         
-        
-#warning Current not support screen shot and become active notification
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadScreenShot) name:UIApplicationUserDidTakeScreenshotNotification object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadCurrentAlbum) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
@@ -291,13 +352,13 @@ static NSString * const CameraButton = @"CameraButton";
         _shouldPreLoadIndex = _currentAlbum == nil;
         
         _currentAlbum = currentAlbum;
-        if ([NSThread isMainThread]) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([self.delegate respondsToSelector:@selector(dx_imagePickerController:didSelectAlbumName:)]) {
+                [self.delegate dx_imagePickerController:self didSelectAlbumName:[self.currentAlbum valueForProperty:ALAssetsGroupPropertyName]];
+            }
             [self _reload];
-        }else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self _reload];
-            });
-        }
+        });
     }
 }
 
@@ -352,7 +413,7 @@ static NSString * const CameraButton = @"CameraButton";
     self.tableView.dataSource = self;
     self.tableView.rowHeight = [DXAlbumCell standHeight];
     
-    CGFloat const inset = 5.0;
+    CGFloat const inset = 3.0;
     CGFloat const eachLineCount = 3;
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = inset;
@@ -385,9 +446,7 @@ static NSString * const CameraButton = @"CameraButton";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSString *key = [self.currentAlbum valueForProperty:ALAssetsGroupPropertyName];
-    NSArray *assets = self.albumsAssetMap[key];
-    return assets.count;
+    return [self _currentAblumAssets].count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -403,9 +462,11 @@ static NSString * const CameraButton = @"CameraButton";
             return cell;
         }
     }
-    cell.imageView.image = [UIImage imageWithCGImage:[self _assetForIndexPath:indexPath].thumbnail];
+    ALAsset *asset = [[self _currentAblumAssets] objectAtIndex:indexPath.row];
+    NSString *assetName = [asset defaultRepresentation].filename;
+    cell.imageView.image = [UIImage imageWithCGImage:asset.thumbnail];
     cell.numberView.normalColor = self.themeColor;
-    NSInteger supposeIndex = [self.selectedOrderMap[indexPath] integerValue];
+    NSInteger supposeIndex = [self.selectedOrderMap[assetName] integerValue];
     cell.numberView.index = supposeIndex;
     
     return cell;
@@ -444,41 +505,20 @@ static NSString * const CameraButton = @"CameraButton";
     }
     
     
-    ALAsset *asset = [self _assetForIndexPath:indexPath];
-    [self.selectedAssets addObject:asset];
-    self.navigationItem.rightBarButtonItem.enabled = self.selectedAssets.count > 0;
+    ALAsset *asset = [[self _currentAblumAssets] objectAtIndex:indexPath.row];
+    [self _addSelectedAsset:asset];
+    
     DXPhotoCollectionViewCell *cell = (DXPhotoCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     NSInteger supposeIndex = self.selectedAssets.count;
     cell.numberView.index = supposeIndex;
     [cell bounce];
-    self.selectedOrderMap[indexPath] = @(supposeIndex);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    ALAsset *asset = [[self _currentAblumAssets] objectAtIndex:indexPath.row];
+    [self _removeSelectedAsset:asset];
     DXPhotoCollectionViewCell *cell = (DXPhotoCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    if (cell.numberView.index < self.selectedAssets.count){
-        
-        //update visible cells
-        NSArray *visibleCells = [collectionView visibleCells];
-        for (DXPhotoCollectionViewCell *vcell in visibleCells) {
-            if (vcell.numberView.index > cell.numberView.index) {
-                vcell.numberView.index -= 1;
-            }
-        }
-        
-        //update selectMap
-        NSDictionary *copyDic = [self.selectedOrderMap copy];
-        [copyDic enumerateKeysAndObjectsUsingBlock:^(id key, NSNumber *number, BOOL *stop) {
-            if (number.integerValue > cell.numberView.index) {
-                self.selectedOrderMap[key] = @(number.integerValue-1);
-            }
-        }];
-    }
-    ALAsset *asset = [self _assetForIndexPath:indexPath];
-    [self.selectedAssets removeObject:asset];
-    self.navigationItem.rightBarButtonItem.enabled = self.selectedAssets.count > 0;
-    
     [cell bounce];
 }
 

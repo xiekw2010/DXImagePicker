@@ -16,7 +16,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        self.textAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:[UIFont systemFontOfSize:10.0]};
+        self.textAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Medium" size:12.0]};
     }
     return self;
 }
@@ -30,12 +30,12 @@
 - (void)drawRect:(CGRect)rect
 {
     CGSize const size = self.bounds.size;
-    CGFloat const lineWidth = 5.0;
+    CGFloat const lineWidth = 6.0;
 
     UIColor *strokeColor = self.normalColor;
 
-    CGSize const rightCornerSize = CGSizeMake(21.0, 21.0);
-    UIBezierPath* rectPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(size.width-rightCornerSize.width, 0, rightCornerSize.width, rightCornerSize.height) cornerRadius:2.0];
+    CGSize const rightCornerSize = CGSizeMake(23.0, 23.0);
+    UIBezierPath* rectPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(size.width-rightCornerSize.width, 0, rightCornerSize.width, rightCornerSize.height) cornerRadius:3.0];
     [strokeColor setFill];
     [rectPath fill];
     

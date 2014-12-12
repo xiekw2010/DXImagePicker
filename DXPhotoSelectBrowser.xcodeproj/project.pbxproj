@@ -51,7 +51,6 @@
 		BE7FCA9A1A37E782005C64F0 /* DXAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DXAppDelegate.h; sourceTree = "<group>"; };
 		BE7FCA9B1A37E782005C64F0 /* DXAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DXAppDelegate.m; sourceTree = "<group>"; };
 		BE7FCA9D1A37E782005C64F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		BE7FCAA41A37E782005C64F0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		BEF55D801A3A9090004BB443 /* DXDetailImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXDetailImageViewController.h; sourceTree = "<group>"; };
 		BEF55D811A3A9090004BB443 /* DXDetailImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXDetailImageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,7 +122,6 @@
 				BE7FCA8B1A37E782005C64F0 /* Foundation.framework */,
 				BE7FCA8D1A37E782005C64F0 /* CoreGraphics.framework */,
 				BE7FCA8F1A37E782005C64F0 /* UIKit.framework */,
-				BE7FCAA41A37E782005C64F0 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
