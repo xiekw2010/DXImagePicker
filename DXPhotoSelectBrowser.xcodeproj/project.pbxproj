@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77CEC5691A3A9D4000E0E968 /* DXPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CEC5681A3A9D4000E0E968 /* DXPageViewController.m */; };
 		BE155B041A37EEF9008486DA /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE155B031A37EEF9008486DA /* AssetsLibrary.framework */; };
 		BE155B071A37F0BD008486DA /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE155B061A37F0BD008486DA /* HomeViewController.m */; };
 		BE640A8D1A399BFB00761C38 /* DXImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = BE640A841A399BFB00761C38 /* DXImagePicker.m */; };
@@ -24,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		77CEC5671A3A9D4000E0E968 /* DXPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXPageViewController.h; sourceTree = "<group>"; };
+		77CEC5681A3A9D4000E0E968 /* DXPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXPageViewController.m; sourceTree = "<group>"; };
 		BE155B031A37EEF9008486DA /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AssetsLibrary.framework; sourceTree = DEVELOPER_DIR; };
 		BE155B051A37F0BD008486DA /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		BE155B061A37F0BD008486DA /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
@@ -74,6 +77,8 @@
 				BE640A871A399BFB00761C38 /* DXPhotoCollectionViewCell.m */,
 				BE640A921A399C2900761C38 /* DXUtilViews.h */,
 				BE640A931A399C2900761C38 /* DXUtilViews.m */,
+				77CEC5671A3A9D4000E0E968 /* DXPageViewController.h */,
+				77CEC5681A3A9D4000E0E968 /* DXPageViewController.m */,
 				BE640A851A399BFB00761C38 /* DXImagePickerImage.bundle */,
 				BE640A881A399BFB00761C38 /* DXPopover */,
 			);
@@ -209,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE7FCA9C1A37E782005C64F0 /* DXAppDelegate.m in Sources */,
+				77CEC5691A3A9D4000E0E968 /* DXPageViewController.m in Sources */,
 				BE7FCA981A37E782005C64F0 /* main.m in Sources */,
 				BE155B071A37F0BD008486DA /* HomeViewController.m in Sources */,
 				BE640A8D1A399BFB00761C38 /* DXImagePicker.m in Sources */,
