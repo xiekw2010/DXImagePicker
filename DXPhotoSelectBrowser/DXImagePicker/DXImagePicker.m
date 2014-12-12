@@ -11,6 +11,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "DXPopover.h"
 #import "DXUtilViews.h"
+#import "DXDetailImageViewController.h"
 
 static NSString * const CollectionCellId = @"dxCellid";
 static NSString * const CameraButton = @"CameraButton";
@@ -163,7 +164,6 @@ static NSString * const CameraButton = @"CameraButton";
 - (void)_reloadCurrentAlbum
 {
     NSString *albumName = [self.currentAlbum valueForProperty:ALAssetsGroupPropertyName];
-
     NSArray *currentArray = self.albumsAssetMap[albumName];
     NSLog(@"Before reload album count is %lu", (unsigned long)currentArray.count);
 
@@ -194,16 +194,18 @@ static NSString * const CameraButton = @"CameraButton";
     NSMutableArray *currentArray = self.albumsAssetMap[albumName];
     NSLog(@"Before reload album count is %lu", (unsigned long)currentArray.count);
     
-    [self.currentAlbum enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 0)] options:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-        NSLog(@"index asset name is %@", [result valueForProperty:ALAssetPropertyAssetURL]);
-        
+    [_cameraGroup enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:currentArray.count-2] options:0 usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+        if (!result) {
+            return;
+        }
         [currentArray insertObject:result atIndex:1];
     }];
     
     NSLog(@"After reload album count is %lu", (unsigned long)currentArray.count);
     self.albumsAssetMap[albumName] = currentArray;
-    [self.collectionView reloadData];
-
+    if ([self _isCameraRoll]) {
+        [self.collectionView reloadData];
+    }
 }
 
 - (BOOL)_isCameraRoll
@@ -268,8 +270,10 @@ static NSString * const CameraButton = @"CameraButton";
         self.themeBlack = YES;
         self.maxSelectedCount = -1;
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadCurrentAlbum) name:UIApplicationUserDidTakeScreenshotNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadCurrentAlbum) name:UIApplicationDidBecomeActiveNotification object:nil];
+        
+#warning Current not support screen shot and become active notification
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadScreenShot) name:UIApplicationUserDidTakeScreenshotNotification object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadCurrentAlbum) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
@@ -389,6 +393,9 @@ static NSString * const CameraButton = @"CameraButton";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     DXPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CollectionCellId forIndexPath:indexPath];
+    cell.tag = indexPath.row;
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressCell:)];
+    [cell addGestureRecognizer:longPress];
     
     if ([self _isCameraRoll]) {
         if (indexPath.row == 0) {
@@ -402,6 +409,19 @@ static NSString * const CameraButton = @"CameraButton";
     cell.numberView.index = supposeIndex;
     
     return cell;
+}
+
+- (void)longPressCell:(UILongPressGestureRecognizer *)longPress
+{
+    if (longPress.state == UIGestureRecognizerStateBegan) {
+        NSString *currentAssetName = [self.currentAlbum valueForProperty:ALAssetsGroupPropertyName];
+        NSArray *assets = self.albumsAssetMap[currentAssetName];
+        ALAsset *asset = assets[longPress.view.tag];
+        NSLog(@"asset is %@", asset);
+        DXDetailImageViewController *detail = [DXDetailImageViewController new];
+        [self.navigationController pushViewController:detail animated:YES];
+
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

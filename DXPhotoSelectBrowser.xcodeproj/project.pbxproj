@@ -22,6 +22,7 @@
 		BE7FCA981A37E782005C64F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7FCA971A37E782005C64F0 /* main.m */; };
 		BE7FCA9C1A37E782005C64F0 /* DXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7FCA9B1A37E782005C64F0 /* DXAppDelegate.m */; };
 		BE7FCA9E1A37E782005C64F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE7FCA9D1A37E782005C64F0 /* Images.xcassets */; };
+		BEF55D821A3A9090004BB443 /* DXDetailImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF55D811A3A9090004BB443 /* DXDetailImageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,8 @@
 		BE7FCA9B1A37E782005C64F0 /* DXAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DXAppDelegate.m; sourceTree = "<group>"; };
 		BE7FCA9D1A37E782005C64F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BE7FCAA41A37E782005C64F0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		BEF55D801A3A9090004BB443 /* DXDetailImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXDetailImageViewController.h; sourceTree = "<group>"; };
+		BEF55D811A3A9090004BB443 /* DXDetailImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXDetailImageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +78,8 @@
 				BE640A841A399BFB00761C38 /* DXImagePicker.m */,
 				BE640A861A399BFB00761C38 /* DXPhotoCollectionViewCell.h */,
 				BE640A871A399BFB00761C38 /* DXPhotoCollectionViewCell.m */,
+				BEF55D801A3A9090004BB443 /* DXDetailImageViewController.h */,
+				BEF55D811A3A9090004BB443 /* DXDetailImageViewController.m */,
 				BE640A921A399C2900761C38 /* DXUtilViews.h */,
 				BE640A931A399C2900761C38 /* DXUtilViews.m */,
 				77CEC5671A3A9D4000E0E968 /* DXPageViewController.h */,
@@ -215,6 +220,7 @@
 			files = (
 				BE7FCA9C1A37E782005C64F0 /* DXAppDelegate.m in Sources */,
 				77CEC5691A3A9D4000E0E968 /* DXPageViewController.m in Sources */,
+				BEF55D821A3A9090004BB443 /* DXDetailImageViewController.m in Sources */,
 				BE7FCA981A37E782005C64F0 /* main.m in Sources */,
 				BE155B071A37F0BD008486DA /* HomeViewController.m in Sources */,
 				BE640A8D1A399BFB00761C38 /* DXImagePicker.m in Sources */,
