@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		77CEC5691A3A9D4000E0E968 /* DXPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CEC5681A3A9D4000E0E968 /* DXPageViewController.m */; };
+		77CEC5691A3A9D4000E0E968 /* DXPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 77CEC5681A3A9D4000E0E968 /* DXPhotoBrowser.m */; };
 		BE155B041A37EEF9008486DA /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE155B031A37EEF9008486DA /* AssetsLibrary.framework */; };
 		BE155B071A37F0BD008486DA /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE155B061A37F0BD008486DA /* HomeViewController.m */; };
 		BE640A8D1A399BFB00761C38 /* DXImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = BE640A841A399BFB00761C38 /* DXImagePicker.m */; };
@@ -26,8 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		77CEC5671A3A9D4000E0E968 /* DXPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXPageViewController.h; sourceTree = "<group>"; };
-		77CEC5681A3A9D4000E0E968 /* DXPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXPageViewController.m; sourceTree = "<group>"; };
+		77CEC5671A3A9D4000E0E968 /* DXPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXPhotoBrowser.h; sourceTree = "<group>"; };
+		77CEC5681A3A9D4000E0E968 /* DXPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXPhotoBrowser.m; sourceTree = "<group>"; };
 		BE155B031A37EEF9008486DA /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AssetsLibrary.framework; sourceTree = DEVELOPER_DIR; };
 		BE155B051A37F0BD008486DA /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		BE155B061A37F0BD008486DA /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
@@ -82,8 +82,8 @@
 				BEF55D811A3A9090004BB443 /* DXDetailImageViewController.m */,
 				BE640A921A399C2900761C38 /* DXUtilViews.h */,
 				BE640A931A399C2900761C38 /* DXUtilViews.m */,
-				77CEC5671A3A9D4000E0E968 /* DXPageViewController.h */,
-				77CEC5681A3A9D4000E0E968 /* DXPageViewController.m */,
+				77CEC5671A3A9D4000E0E968 /* DXPhotoBrowser.h */,
+				77CEC5681A3A9D4000E0E968 /* DXPhotoBrowser.m */,
 				BE640A851A399BFB00761C38 /* DXImagePickerImage.bundle */,
 				BE640A881A399BFB00761C38 /* DXPopover */,
 			);
@@ -219,7 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE7FCA9C1A37E782005C64F0 /* DXAppDelegate.m in Sources */,
-				77CEC5691A3A9D4000E0E968 /* DXPageViewController.m in Sources */,
+				77CEC5691A3A9D4000E0E968 /* DXPhotoBrowser.m in Sources */,
 				BEF55D821A3A9090004BB443 /* DXDetailImageViewController.m in Sources */,
 				BE7FCA981A37E782005C64F0 /* main.m in Sources */,
 				BE155B071A37F0BD008486DA /* HomeViewController.m in Sources */,
@@ -278,7 +278,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "834a83fd-991e-4711-9ea5-d2756268a422";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -311,7 +311,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PROVISIONING_PROFILE = "834a83fd-991e-4711-9ea5-d2756268a422";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -330,7 +330,7 @@
 				GCC_PREFIX_HEADER = "DXPhotoSelectBrowser/DXPhotoSelectBrowser-Prefix.pch";
 				INFOPLIST_FILE = "DXPhotoSelectBrowser/DXPhotoSelectBrowser-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "30b76c5d-c705-449d-8e63-e4eb355ae915";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
