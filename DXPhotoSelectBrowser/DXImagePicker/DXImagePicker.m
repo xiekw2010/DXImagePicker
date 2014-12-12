@@ -11,12 +11,12 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "DXPopover.h"
 #import "DXUtilViews.h"
-#import "DXDetailImageViewController.h"
+#import "DXPhotoBrowser.h"
 
 static NSString * const CollectionCellId = @"dxCellid";
 static NSString * const CameraButton = @"CameraButton";
 
-@interface DXImagePicker ()<UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface DXImagePicker ()<UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DXPhotoBrowserDelegate>
 {
     UIImage *_captureImage;
     BOOL _shouldPreLoadIndex;
@@ -474,12 +474,15 @@ static NSString * const CameraButton = @"CameraButton";
 
 - (void)longPressCell:(UILongPressGestureRecognizer *)longPress
 {
+#warning here
     if (longPress.state == UIGestureRecognizerStateBegan) {
         NSString *currentAssetName = [self.currentAlbum valueForProperty:ALAssetsGroupPropertyName];
         NSArray *assets = self.albumsAssetMap[currentAssetName];
         ALAsset *asset = assets[longPress.view.tag];
         NSLog(@"asset is %@", asset);
-        DXDetailImageViewController *detail = [DXDetailImageViewController new];
+        DXPhotoBrowser *detail = [DXPhotoBrowser new];
+        detail.delegate = self;
+        [detail setCurrentPhotoIndex:longPress.view.tag - 1];
         [self.navigationController pushViewController:detail animated:YES];
 
     }
@@ -575,6 +578,27 @@ static NSString * const CameraButton = @"CameraButton";
     ALAssetsGroup *album = self.albums[indexPath.row];
     self.currentAlbum = album;
     [self.popover dismiss];
+}
+
+#pragma mark - DXPhotoBrowserDelegate
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(DXPhotoBrowser *)photoBrowser
+{
+    NSString *currentAssetName = [self.currentAlbum valueForProperty:ALAssetsGroupPropertyName];
+    NSArray *assets = self.albumsAssetMap[currentAssetName];
+    return assets.count - 1;
+}
+
+- (UIImage *)photoBrowser:(DXPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index
+{
+    NSString *currentAssetName = [self.currentAlbum valueForProperty:ALAssetsGroupPropertyName];
+    NSArray *assets = self.albumsAssetMap[currentAssetName];
+    ALAsset *asset = assets[index + 1];
+    //NSLog(@"asset:%@",asset);
+    ALAssetRepresentation *rep = [asset defaultRepresentation];
+    CGImageRef cgImage = [rep fullResolutionImage];
+    UIImage *image= [UIImage imageWithCGImage:cgImage];
+    return image;
 }
 
 - (void)didReceiveMemoryWarning {
