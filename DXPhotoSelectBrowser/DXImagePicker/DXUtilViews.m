@@ -107,30 +107,56 @@
 
 @end
 
-@implementation TriangleButton
+@interface TriangleLayer : CAShapeLayer
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.triangleShaper = [CAShapeLayer layer];
-        self.titleLabel.font = [UIFont systemFontOfSize:16.0];
-    }
-    return self;
-}
+- (UIImage *)tImage;
 
-- (void)drawRect:(CGRect)rect
+@end
+
+@implementation TriangleLayer
+
+- (void)setBounds:(CGRect)bounds
 {
-    [super drawRect:rect];
+    [super setBounds:bounds];
+    
     UIBezierPath *path = [UIBezierPath new];
-    CGSize const triangleSize = CGSizeMake(8, 5);
+    CGSize const triangleSize = bounds.size;
     [path moveToPoint:CGPointMake(0, 0)];
     [path addLineToPoint:CGPointMake(triangleSize.width * 0.5, triangleSize.height)];
     [path addLineToPoint:CGPointMake(triangleSize.width, 0)];
-    self.triangleShaper.bounds = (CGRect){CGPointZero, triangleSize};
-    self.triangleShaper.path = path.CGPath;
-    [self.layer addSublayer:self.triangleShaper];
+    self.path = path.CGPath;
+}
 
+- (UIImage *)tImage
+{
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, 0, 0);
+    [self renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *outputImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return outputImage;
+}
+
+@end
+
+@interface TriangleButton ()
+
+@end
+
+@implementation TriangleButton
+
+- (instancetype)initWithFrame:(CGRect)frame themeColor:(UIColor *)color
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        TriangleLayer *triangleShaper = [TriangleLayer layer];
+        triangleShaper.fillColor = color.CGColor;
+        triangleShaper.bounds = CGRectMake(0, 0, 8, 5);
+        self.imageView.bounds = triangleShaper.bounds;
+        self.titleLabel.font = [UIFont systemFontOfSize:16.0];
+        [self setImage:[triangleShaper tImage] forState:UIControlStateNormal];
+        [self setTitleColor:color forState:UIControlStateNormal];
+    }
+    return self;
 }
 
 - (void)layoutSubviews
@@ -139,9 +165,9 @@
     
     CGSize textSize = [[self titleForState:UIControlStateNormal] boundingRectWithSize:CGSizeMake(CGRectGetWidth(self.bounds), CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.titleLabel.font} context:nil].size;
     CGFloat const betweenTextAndTriangle = 4.0;
-    CGFloat wholeWidth = betweenTextAndTriangle + self.triangleShaper.bounds.size.width + textSize.width;
+    CGFloat wholeWidth = betweenTextAndTriangle + self.imageView.bounds.size.width + textSize.width;
     self.titleLabel.frame = CGRectMake((CGRectGetWidth(self.bounds) - wholeWidth) * 0.5, (CGRectGetHeight(self.bounds) - textSize.height) * 0.5, textSize.width, textSize.height);
-    self.triangleShaper.frame = CGRectMake(CGRectGetMaxX(self.titleLabel.frame) + betweenTextAndTriangle, (CGRectGetHeight(self.bounds) - CGRectGetHeight(self.triangleShaper.bounds)) * 0.5 + 1.0, CGRectGetWidth(self.triangleShaper.bounds), CGRectGetHeight(self.triangleShaper.bounds));
+    self.imageView.frame = CGRectMake(CGRectGetMaxX(self.titleLabel.frame) + betweenTextAndTriangle, (CGRectGetHeight(self.bounds) - CGRectGetHeight(self.imageView.bounds)) * 0.5 + 1.0, CGRectGetWidth(self.imageView.bounds), CGRectGetHeight(self.imageView.bounds));
 }
 
 @end

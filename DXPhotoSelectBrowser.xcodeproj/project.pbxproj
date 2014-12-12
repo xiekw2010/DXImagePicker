@@ -21,22 +21,7 @@
 		BE7FCA981A37E782005C64F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7FCA971A37E782005C64F0 /* main.m */; };
 		BE7FCA9C1A37E782005C64F0 /* DXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7FCA9B1A37E782005C64F0 /* DXAppDelegate.m */; };
 		BE7FCA9E1A37E782005C64F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE7FCA9D1A37E782005C64F0 /* Images.xcassets */; };
-		BE7FCAA51A37E782005C64F0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7FCAA41A37E782005C64F0 /* XCTest.framework */; };
-		BE7FCAA61A37E782005C64F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7FCA8B1A37E782005C64F0 /* Foundation.framework */; };
-		BE7FCAA71A37E782005C64F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE7FCA8F1A37E782005C64F0 /* UIKit.framework */; };
-		BE7FCAAF1A37E782005C64F0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE7FCAAD1A37E782005C64F0 /* InfoPlist.strings */; };
-		BE7FCAB11A37E782005C64F0 /* DXPhotoSelectBrowserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7FCAB01A37E782005C64F0 /* DXPhotoSelectBrowserTests.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		BE7FCAA81A37E782005C64F0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BE7FCA801A37E782005C64F0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BE7FCA871A37E782005C64F0;
-			remoteInfo = DXPhotoSelectBrowser;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		BE155B031A37EEF9008486DA /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/AssetsLibrary.framework; sourceTree = DEVELOPER_DIR; };
@@ -62,11 +47,7 @@
 		BE7FCA9A1A37E782005C64F0 /* DXAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DXAppDelegate.h; sourceTree = "<group>"; };
 		BE7FCA9B1A37E782005C64F0 /* DXAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DXAppDelegate.m; sourceTree = "<group>"; };
 		BE7FCA9D1A37E782005C64F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		BE7FCAA31A37E782005C64F0 /* DXPhotoSelectBrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DXPhotoSelectBrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE7FCAA41A37E782005C64F0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		BE7FCAAC1A37E782005C64F0 /* DXPhotoSelectBrowserTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DXPhotoSelectBrowserTests-Info.plist"; sourceTree = "<group>"; };
-		BE7FCAAE1A37E782005C64F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		BE7FCAB01A37E782005C64F0 /* DXPhotoSelectBrowserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DXPhotoSelectBrowserTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,16 +59,6 @@
 				BE7FCA901A37E782005C64F0 /* UIKit.framework in Frameworks */,
 				BE7FCA8C1A37E782005C64F0 /* Foundation.framework in Frameworks */,
 				BE155B041A37EEF9008486DA /* AssetsLibrary.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BE7FCAA01A37E782005C64F0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BE7FCAA51A37E782005C64F0 /* XCTest.framework in Frameworks */,
-				BE7FCAA71A37E782005C64F0 /* UIKit.framework in Frameworks */,
-				BE7FCAA61A37E782005C64F0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,7 +93,6 @@
 			isa = PBXGroup;
 			children = (
 				BE7FCA911A37E782005C64F0 /* DXPhotoSelectBrowser */,
-				BE7FCAAA1A37E782005C64F0 /* DXPhotoSelectBrowserTests */,
 				BE7FCA8A1A37E782005C64F0 /* Frameworks */,
 				BE7FCA891A37E782005C64F0 /* Products */,
 			);
@@ -132,7 +102,6 @@
 			isa = PBXGroup;
 			children = (
 				BE7FCA881A37E782005C64F0 /* DXPhotoSelectBrowser.app */,
-				BE7FCAA31A37E782005C64F0 /* DXPhotoSelectBrowserTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -174,24 +143,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BE7FCAAA1A37E782005C64F0 /* DXPhotoSelectBrowserTests */ = {
-			isa = PBXGroup;
-			children = (
-				BE7FCAB01A37E782005C64F0 /* DXPhotoSelectBrowserTests.m */,
-				BE7FCAAB1A37E782005C64F0 /* Supporting Files */,
-			);
-			path = DXPhotoSelectBrowserTests;
-			sourceTree = "<group>";
-		};
-		BE7FCAAB1A37E782005C64F0 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				BE7FCAAC1A37E782005C64F0 /* DXPhotoSelectBrowserTests-Info.plist */,
-				BE7FCAAD1A37E782005C64F0 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -212,24 +163,6 @@
 			productReference = BE7FCA881A37E782005C64F0 /* DXPhotoSelectBrowser.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BE7FCAA21A37E782005C64F0 /* DXPhotoSelectBrowserTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BE7FCAB71A37E782005C64F0 /* Build configuration list for PBXNativeTarget "DXPhotoSelectBrowserTests" */;
-			buildPhases = (
-				BE7FCA9F1A37E782005C64F0 /* Sources */,
-				BE7FCAA01A37E782005C64F0 /* Frameworks */,
-				BE7FCAA11A37E782005C64F0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BE7FCAA91A37E782005C64F0 /* PBXTargetDependency */,
-			);
-			name = DXPhotoSelectBrowserTests;
-			productName = DXPhotoSelectBrowserTests;
-			productReference = BE7FCAA31A37E782005C64F0 /* DXPhotoSelectBrowserTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -239,11 +172,6 @@
 				CLASSPREFIX = DX;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = xiekw;
-				TargetAttributes = {
-					BE7FCAA21A37E782005C64F0 = {
-						TestTargetID = BE7FCA871A37E782005C64F0;
-					};
-				};
 			};
 			buildConfigurationList = BE7FCA831A37E782005C64F0 /* Build configuration list for PBXProject "DXPhotoSelectBrowser" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -258,7 +186,6 @@
 			projectRoot = "";
 			targets = (
 				BE7FCA871A37E782005C64F0 /* DXPhotoSelectBrowser */,
-				BE7FCAA21A37E782005C64F0 /* DXPhotoSelectBrowserTests */,
 			);
 		};
 /* End PBXProject section */
@@ -271,14 +198,6 @@
 				BE640A8E1A399BFB00761C38 /* DXImagePickerImage.bundle in Resources */,
 				BE7FCA961A37E782005C64F0 /* InfoPlist.strings in Resources */,
 				BE7FCA9E1A37E782005C64F0 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BE7FCAA11A37E782005C64F0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BE7FCAAF1A37E782005C64F0 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,37 +218,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BE7FCA9F1A37E782005C64F0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BE7FCAB11A37E782005C64F0 /* DXPhotoSelectBrowserTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		BE7FCAA91A37E782005C64F0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BE7FCA871A37E782005C64F0 /* DXPhotoSelectBrowser */;
-			targetProxy = BE7FCAA81A37E782005C64F0 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		BE7FCA941A37E782005C64F0 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				BE7FCA951A37E782005C64F0 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		BE7FCAAD1A37E782005C64F0 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BE7FCAAE1A37E782005C64F0 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -371,7 +266,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "16eeb6d2-4917-4b7a-8859-277910dda678";
+				PROVISIONING_PROFILE = "834a83fd-991e-4711-9ea5-d2756268a422";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -404,7 +299,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PROVISIONING_PROFILE = "16eeb6d2-4917-4b7a-8859-277910dda678";
+				PROVISIONING_PROFILE = "834a83fd-991e-4711-9ea5-d2756268a422";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -416,14 +311,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DXPhotoSelectBrowser/DXPhotoSelectBrowser-Prefix.pch";
 				INFOPLIST_FILE = "DXPhotoSelectBrowser/DXPhotoSelectBrowser-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "BD778C99-598D-4BFD-A8CE-A15411E40EBD";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -433,55 +328,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DXPhotoSelectBrowser/DXPhotoSelectBrowser-Prefix.pch";
 				INFOPLIST_FILE = "DXPhotoSelectBrowser/DXPhotoSelectBrowser-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "BD778C99-598D-4BFD-A8CE-A15411E40EBD";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		BE7FCAB81A37E782005C64F0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DXPhotoSelectBrowser.app/DXPhotoSelectBrowser";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DXPhotoSelectBrowser/DXPhotoSelectBrowser-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "DXPhotoSelectBrowserTests/DXPhotoSelectBrowserTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		BE7FCAB91A37E782005C64F0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DXPhotoSelectBrowser.app/DXPhotoSelectBrowser";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DXPhotoSelectBrowser/DXPhotoSelectBrowser-Prefix.pch";
-				INFOPLIST_FILE = "DXPhotoSelectBrowserTests/DXPhotoSelectBrowserTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -502,15 +357,6 @@
 			buildConfigurations = (
 				BE7FCAB51A37E782005C64F0 /* Debug */,
 				BE7FCAB61A37E782005C64F0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BE7FCAB71A37E782005C64F0 /* Build configuration list for PBXNativeTarget "DXPhotoSelectBrowserTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BE7FCAB81A37E782005C64F0 /* Debug */,
-				BE7FCAB91A37E782005C64F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

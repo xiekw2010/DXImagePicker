@@ -20,6 +20,7 @@ static NSString * const CameraButton = @"CameraButton";
     UIImage *_captureImage;
     BOOL _shouldPreLoadIndex;
     NSInteger _shouldSelectAlbumIndex;
+    ALAssetsGroup *_cameraGroup;
 }
 
 @property (nonatomic, strong) ALAssetsLibrary *assetLibrary;
@@ -60,7 +61,7 @@ static NSString * const CameraButton = @"CameraButton";
              [self.albums addObject:group];
              
              NSMutableArray *array = [NSMutableArray array];
-             [group enumerateAssetsWithOptions:0 usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+             [group enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
                  if (!result) {
                      return;
                  }
@@ -82,6 +83,7 @@ static NSString * const CameraButton = @"CameraButton";
                          if (nType == ALAssetsGroupSavedPhotos) {
                              NSMutableArray *mArray = self.albumsAssetMap[[obj valueForProperty:ALAssetsGroupPropertyName]];
                              [mArray insertObject:CameraButton atIndex:0];
+                             _cameraGroup = obj;
                          }
                          
                          
@@ -158,6 +160,52 @@ static NSString * const CameraButton = @"CameraButton";
     }
 }
 
+- (void)_reloadCurrentAlbum
+{
+    NSString *albumName = [self.currentAlbum valueForProperty:ALAssetsGroupPropertyName];
+
+    NSArray *currentArray = self.albumsAssetMap[albumName];
+    NSLog(@"Before reload album count is %lu", (unsigned long)currentArray.count);
+
+    
+    NSMutableArray *array = [NSMutableArray array];
+    [self.currentAlbum enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+        if (!result) {
+            return;
+        }
+        [array addObject:result];
+    }];
+    
+    [self.currentAlbum enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 1)] options:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+        NSLog(@"index asset name is %@", [result valueForProperty:ALAssetPropertyAssetURL]);
+    }];
+    
+    if ([self _isCameraRoll]) {
+        [array insertObject:CameraButton atIndex:0];
+    }
+    NSLog(@"After reload album count is %lu", (unsigned long)array.count);
+    self.albumsAssetMap[albumName] = array;
+    [self.collectionView reloadData];
+}
+
+- (void)_reloadScreenShot
+{
+    NSString *albumName = [_cameraGroup valueForProperty:ALAssetsGroupPropertyName];
+    NSMutableArray *currentArray = self.albumsAssetMap[albumName];
+    NSLog(@"Before reload album count is %lu", (unsigned long)currentArray.count);
+    
+    [self.currentAlbum enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 0)] options:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+        NSLog(@"index asset name is %@", [result valueForProperty:ALAssetPropertyAssetURL]);
+        
+        [currentArray insertObject:result atIndex:1];
+    }];
+    
+    NSLog(@"After reload album count is %lu", (unsigned long)currentArray.count);
+    self.albumsAssetMap[albumName] = currentArray;
+    [self.collectionView reloadData];
+
+}
+
 - (BOOL)_isCameraRoll
 {
     return  [[self.currentAlbum valueForProperty:ALAssetsGroupPropertyType] integerValue]==ALAssetsGroupSavedPhotos;
@@ -219,8 +267,16 @@ static NSString * const CameraButton = @"CameraButton";
         self.selectedOrderMap = [NSMutableDictionary dictionary];
         self.themeBlack = YES;
         self.maxSelectedCount = -1;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadCurrentAlbum) name:UIApplicationUserDidTakeScreenshotNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadCurrentAlbum) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setCurrentAlbum:(ALAssetsGroup *)currentAlbum
@@ -282,12 +338,10 @@ static NSString * const CameraButton = @"CameraButton";
     
     self.navigationItem.leftBarButtonItem.tintColor = self.navigationItem.rightBarButtonItem.tintColor = self.themeColor;
     
-    self.titleButton = [[TriangleButton alloc] initWithFrame:CGRectMake(0, 0, 200, 44.0)];
-    self.titleButton.triangleShaper.fillColor = titleColor.CGColor;
+    self.titleButton = [[TriangleButton alloc] initWithFrame:CGRectMake(0, 0, 200, 44.0) themeColor:titleColor];
     [self.titleButton setTitle:[self.currentAlbum valueForProperty:ALAssetsGroupPropertyName] forState:UIControlStateNormal];
     self.navigationItem.titleView = self.titleButton;
     [self.titleButton addTarget:self action:@selector(_showAlbums) forControlEvents:UIControlEventTouchUpInside];
-    [self.titleButton setTitleColor:titleColor forState:UIControlStateNormal];
     
     self.tableView = [[UITableView alloc] initWithFrame:(CGRect){CGPointZero, CGSizeMake(CGRectGetWidth(self.view.bounds), 100)} style:UITableViewStylePlain];
     self.tableView.delegate = self;
@@ -416,7 +470,7 @@ static NSString * const CameraButton = @"CameraButton";
         _captureImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     }
     
-    [picker dismissViewControllerAnimated:YES completion:^{
+    [picker dismissViewControllerAnimated:NO completion:^{
         [self _done];
     }];
 }

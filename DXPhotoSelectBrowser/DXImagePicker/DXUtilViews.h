@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface _ConfirmView : UIView
 
 @property (nonatomic, strong) CAShapeLayer *checkLayer;
@@ -28,6 +29,8 @@
 
 @interface TriangleButton : UIButton
 
-@property (nonatomic, strong) CAShapeLayer *triangleShaper;
+
+- (instancetype)initWithFrame:(CGRect)frame themeColor:(UIColor *)color;
+
 
 @end
