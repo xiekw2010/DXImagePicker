@@ -23,6 +23,7 @@
 		BE7FCA9C1A37E782005C64F0 /* DXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7FCA9B1A37E782005C64F0 /* DXAppDelegate.m */; };
 		BE7FCA9E1A37E782005C64F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE7FCA9D1A37E782005C64F0 /* Images.xcassets */; };
 		BEF55D821A3A9090004BB443 /* DXDetailImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF55D811A3A9090004BB443 /* DXDetailImageViewController.m */; };
+		CBC8E0FF1C0C318300EE75E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBC8E0FE1C0C318300EE75E6 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		BE7FCA9D1A37E782005C64F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BEF55D801A3A9090004BB443 /* DXDetailImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXDetailImageViewController.h; sourceTree = "<group>"; };
 		BEF55D811A3A9090004BB443 /* DXDetailImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXDetailImageViewController.m; sourceTree = "<group>"; };
+		CBC8E0FE1C0C318300EE75E6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 				BE155B051A37F0BD008486DA /* HomeViewController.h */,
 				BE155B061A37F0BD008486DA /* HomeViewController.m */,
 				BE7FCA9D1A37E782005C64F0 /* Images.xcassets */,
+				CBC8E0FE1C0C318300EE75E6 /* LaunchScreen.storyboard */,
 				BE7FCA921A37E782005C64F0 /* Supporting Files */,
 			);
 			path = DXPhotoSelectBrowser;
@@ -204,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE640A8E1A399BFB00761C38 /* DXImagePickerImage.bundle in Resources */,
+				CBC8E0FF1C0C318300EE75E6 /* LaunchScreen.storyboard in Resources */,
 				BE7FCA961A37E782005C64F0 /* InfoPlist.strings in Resources */,
 				BE7FCA9E1A37E782005C64F0 /* Images.xcassets in Resources */,
 			);
