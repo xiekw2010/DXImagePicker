@@ -489,19 +489,19 @@ static NSString * const CameraButton = @"CameraButton";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self _isCameraRoll]) {
-        if (indexPath.row == 0) {
-            [collectionView deselectItemAtIndexPath:indexPath animated:NO];
-            [self _showCamera];
-            return;
-        }
-    }
-    
     if (self.selectedAssets.count == self.maxSelectedCount) {
         if ([self.delegate respondsToSelector:@selector(dx_imagePickerController:didReachMaxSelectedCount:)]) {
             [self.delegate dx_imagePickerController:self didReachMaxSelectedCount:self.selectedAssets.count
              ];
             [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+            return;
+        }
+    }
+    
+    if ([self _isCameraRoll]) {
+        if (indexPath.row == 0) {
+            [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+            [self _showCamera];
             return;
         }
     }
