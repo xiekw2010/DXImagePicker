@@ -63,7 +63,7 @@
         frame.origin.x -= (outerSideEdge+sideEdge);
     }else {
         if (CGRectGetMinX(frame)<0) {
-            frame.origin.x += fabsf(CGRectGetMinX(frame))+sideEdge;
+            frame.origin.x += fabs(CGRectGetMinX(frame))+sideEdge;
         }
     }
     
