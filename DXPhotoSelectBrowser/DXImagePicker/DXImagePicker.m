@@ -474,7 +474,6 @@ static NSString * const CameraButton = @"CameraButton";
 
 - (void)longPressCell:(UILongPressGestureRecognizer *)longPress
 {
-#warning here
     if (longPress.state == UIGestureRecognizerStateBegan) {
         NSString *currentAssetName = [self.currentAlbum valueForProperty:ALAssetsGroupPropertyName];
         NSArray *assets = self.albumsAssetMap[currentAssetName];
