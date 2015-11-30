@@ -276,6 +276,11 @@ static NSString * const CameraButton = @"CameraButton";
 
 - (void)_showCamera
 {
+    if ([self.delegate respondsToSelector:@selector(dx_imagePickerControllerDidPushCameraButton:)]) {
+        [self.delegate dx_imagePickerControllerDidPushCameraButton:self];
+        return;
+    }
+    
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
@@ -376,6 +381,13 @@ static NSString * const CameraButton = @"CameraButton";
         [mArray addObject:url];
     }
     return mArray;
+}
+
+- (void)didTakePhoto:(UIImage *)image
+{
+    _captureImage = image;
+    
+    [self _done];
 }
 
 - (void)viewDidLoad {
@@ -529,13 +541,13 @@ static NSString * const CameraButton = @"CameraButton";
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     // Try getting the edited image first. If it doesn't exist then you get the original image.
-    _captureImage = [info objectForKey:UIImagePickerControllerEditedImage];
-    if (!_captureImage) {
-        _captureImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *captureImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    if (!captureImage) {
+        captureImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     }
     
     [picker dismissViewControllerAnimated:NO completion:^{
-        [self _done];
+        [self didTakePhoto:captureImage];
     }];
 }
 

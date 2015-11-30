@@ -37,6 +37,12 @@
  */
 - (void)dx_imagePickerController:(DXImagePicker *)picker didReachMaxSelectedCount:(NSInteger)maxCount;
 
+
+/**
+ *  When the camera button was pushed
+ */
+- (void)dx_imagePickerControllerDidPushCameraButton:(DXImagePicker *)picker;
+
 @end
 
 
@@ -91,5 +97,10 @@
  *  @return assetsNameArray
  */
 + (NSArray *)getAssetNamesByAssets:(NSArray *)assets;
+
+/**
+ *  Call this method when did take a photo with user-defined camera
+ */
+- (void)didTakePhoto:(UIImage *)image;
 
 @end
