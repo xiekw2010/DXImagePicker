@@ -68,16 +68,9 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    CGSize const size = self.bounds.size;
     CGFloat const lineWidth = 6.0;
     
     UIColor *strokeColor = self.normalColor;
-    
-    CGSize const rightCornerSize = CGSizeMake(23.0, 23.0);
-    UIBezierPath* rectPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(size.width-rightCornerSize.width, 0, rightCornerSize.width, rightCornerSize.height) cornerRadius:3.0];
-    [strokeColor setFill];
-    [rectPath fill];
-    
     
     UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.bounds];
     path.lineWidth = lineWidth;
@@ -85,7 +78,6 @@
     [path stroke];
     
 }
-
 
 @end
 

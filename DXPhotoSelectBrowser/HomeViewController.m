@@ -66,14 +66,14 @@ static NSString  * const kCellId = @"kCollectionViewCellId";
 {
     self.selectedAssetNames = nil;
     if (seg.selectedSegmentIndex == 0) {
-        _themeBlack = YES;
+        _themeBlack = NO;
         _checkMark = NO;
         _themeColor = nil;
         _maxSelectedCount = -1;
     }else {
         _themeBlack = NO;
         _checkMark = YES;
-        _themeColor = [UIColor orangeColor];
+        _themeColor = nil;
         _maxSelectedCount = 5;
     }
 }

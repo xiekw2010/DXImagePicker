@@ -338,7 +338,7 @@ static NSString * const CameraButton = @"CameraButton";
         self.selectedAssets = [NSMutableArray array];
         self.selectedOrderMap = [NSMutableDictionary dictionary];
         self.themeBlack = YES;
-        self.checkMark = NO;
+        self.checkMark = YES;
         self.maxSelectedCount = -1;
     
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadCurrentAlbum:) name:ALAssetsLibraryChangedNotification object:nil];
@@ -395,7 +395,7 @@ static NSString * const CameraButton = @"CameraButton";
     [super viewDidLoad];
     [self _loadAssets];
 
-    self.themeColor = self.themeColor ? : [UIColor colorWithRed:0.06 green:0.51 blue:1.00 alpha:1.00];
+    self.themeColor = self.themeColor ? : [UIColor colorWithRed:26.0f/255.0f green:188.0f/255.0f blue:156.0f/255.0f alpha:1.0f];
 
     
     UIBarStyle barStyle;
@@ -413,8 +413,8 @@ static NSString * const CameraButton = @"CameraButton";
     }
     
     self.navigationController.navigationBar.barStyle = barStyle;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStylePlain target:self action:@selector(_dismiss)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(_done)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"キャンセル", nil) style:UIBarButtonItemStylePlain target:self action:@selector(_dismiss)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"決定", nil) style:UIBarButtonItemStylePlain target:self action:@selector(_done)];
     
     self.navigationItem.leftBarButtonItem.tintColor = self.navigationItem.rightBarButtonItem.tintColor = self.themeColor;
     
