@@ -52,6 +52,43 @@
 
 @end
 
+@implementation DXCellSelectedCheckView
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        self.frame = CGRectMake(frame.size.width-30, 8, 24.0, 24.0);
+        self.layer.cornerRadius = 2;
+        self.image = [UIImage imageNamed:@"icon_image_checked"];
+    }
+    return self;
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    CGSize const size = self.bounds.size;
+    CGFloat const lineWidth = 6.0;
+    
+    UIColor *strokeColor = self.normalColor;
+    
+    CGSize const rightCornerSize = CGSizeMake(23.0, 23.0);
+    UIBezierPath* rectPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(size.width-rightCornerSize.width, 0, rightCornerSize.width, rightCornerSize.height) cornerRadius:3.0];
+    [strokeColor setFill];
+    [rectPath fill];
+    
+    
+    UIBezierPath *path = [UIBezierPath bezierPathWithRect:self.bounds];
+    path.lineWidth = lineWidth;
+    [strokeColor setStroke];
+    [path stroke];
+    
+}
+
+
+@end
+
 @interface DXPhotoCollectionViewCell ()
 
 
@@ -64,10 +101,12 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         self.imageView = [[UIImageView alloc] initWithFrame:self.bounds];
         [self.contentView addSubview:self.imageView];
         
         self.numberView = [[DXCellSelectedNumberView alloc] initWithFrame:self.bounds];
+        self.checkView = [[DXCellSelectedCheckView alloc] initWithFrame:self.bounds];
     }
     return self;
 }
@@ -75,9 +114,17 @@
 - (void)setSelected:(BOOL)selected
 {
     if (selected) {
-        [self.contentView addSubview:self.numberView];
+        if (self.checkMark) {
+           [self.contentView addSubview:self.checkView];
+        } else {
+            [self.contentView addSubview:self.numberView];
+        }
     }else {
-        [self.numberView removeFromSuperview];
+        if (self.checkMark) {
+            [self.checkView removeFromSuperview];
+        } else {
+            [self.numberView removeFromSuperview];
+        }
     }
     [super setSelected:selected];
 }

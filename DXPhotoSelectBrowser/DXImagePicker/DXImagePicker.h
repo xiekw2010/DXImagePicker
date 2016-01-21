@@ -71,6 +71,9 @@
 @property (nonatomic, assign) BOOL themeBlack;
 
 
+@property (nonatomic, assign) BOOL checkMark;
+
+
 /**
  *  When you reach this count, the delegate will call. default is -1;
  */

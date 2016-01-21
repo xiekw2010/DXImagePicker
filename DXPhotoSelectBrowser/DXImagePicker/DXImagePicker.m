@@ -338,6 +338,7 @@ static NSString * const CameraButton = @"CameraButton";
         self.selectedAssets = [NSMutableArray array];
         self.selectedOrderMap = [NSMutableDictionary dictionary];
         self.themeBlack = YES;
+        self.checkMark = NO;
         self.maxSelectedCount = -1;
     
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadCurrentAlbum:) name:ALAssetsLibraryChangedNotification object:nil];
@@ -467,6 +468,14 @@ static NSString * const CameraButton = @"CameraButton";
 {
     DXPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CollectionCellId forIndexPath:indexPath];
     cell.tag = indexPath.row;
+    
+    //ここでセルのマーク指定を行いたい
+    if (self.checkMark) {
+        cell.checkMark = true;
+    } else {
+        cell.checkMark = false;
+    }
+    
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressCell:)];
     [cell addGestureRecognizer:longPress];
     
@@ -480,6 +489,7 @@ static NSString * const CameraButton = @"CameraButton";
     NSString *assetName = [asset defaultRepresentation].filename;
     cell.imageView.image = [UIImage imageWithCGImage:asset.thumbnail];
     cell.numberView.normalColor = self.themeColor;
+    cell.checkView.normalColor = self.themeColor;
     NSInteger supposeIndex = [self.selectedOrderMap[assetName] integerValue];
     cell.numberView.index = supposeIndex;
     
