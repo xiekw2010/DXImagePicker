@@ -44,11 +44,6 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
-    return [self init];
-}
-
 - (void)_setup
 {
     CGRect frame = self.contentViewFrame;
@@ -68,7 +63,7 @@
         frame.origin.x -= (outerSideEdge+sideEdge);
     }else {
         if (CGRectGetMinX(frame)<0) {
-            frame.origin.x += abs(CGRectGetMinX(frame))+sideEdge;
+            frame.origin.x += fabs(CGRectGetMinX(frame))+sideEdge;
         }
     }
     

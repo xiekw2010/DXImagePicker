@@ -16,10 +16,20 @@
 
 @end
 
+
+@interface DXCellSelectedCheckView : UIImageView
+
+@property (nonatomic, strong) UIColor *normalColor;
+
+@end
+
+
 @interface DXPhotoCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) DXCellSelectedNumberView *numberView;
+@property (nonatomic, strong) DXCellSelectedCheckView *checkView;
+@property (nonatomic, assign) BOOL *checkMark;
 
 - (void)bounce;
 

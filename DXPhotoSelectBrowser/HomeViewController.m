@@ -17,6 +17,7 @@ static NSString  * const kCellId = @"kCollectionViewCellId";
 {
     NSString *_shouldUserAlbumName;
     BOOL _themeBlack;
+    BOOL _checkMark;
     UIColor *_themeColor;
     NSInteger _maxSelectedCount;
 }
@@ -65,12 +66,14 @@ static NSString  * const kCellId = @"kCollectionViewCellId";
 {
     self.selectedAssetNames = nil;
     if (seg.selectedSegmentIndex == 0) {
-        _themeBlack = YES;
+        _themeBlack = NO;
+        _checkMark = NO;
         _themeColor = nil;
         _maxSelectedCount = -1;
     }else {
         _themeBlack = NO;
-        _themeColor = [UIColor orangeColor];
+        _checkMark = YES;
+        _themeColor = nil;
         _maxSelectedCount = 5;
     }
 }
@@ -79,6 +82,7 @@ static NSString  * const kCellId = @"kCollectionViewCellId";
 {
     DXImagePicker *browser = [DXImagePicker new];
     browser.themeBlack = _themeBlack;
+    browser.checkMark = _checkMark;
     browser.themeColor = _themeColor;
     browser.delegate = self;
     browser.shouldSelectedAssetFileNames = self.selectedAssetNames;

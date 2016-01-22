@@ -23,6 +23,7 @@
 		BE7FCA9C1A37E782005C64F0 /* DXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7FCA9B1A37E782005C64F0 /* DXAppDelegate.m */; };
 		BE7FCA9E1A37E782005C64F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE7FCA9D1A37E782005C64F0 /* Images.xcassets */; };
 		BEF55D821A3A9090004BB443 /* DXDetailImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF55D811A3A9090004BB443 /* DXDetailImageViewController.m */; };
+		CBC8E0FF1C0C318300EE75E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBC8E0FE1C0C318300EE75E6 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		BE7FCA9D1A37E782005C64F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BEF55D801A3A9090004BB443 /* DXDetailImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXDetailImageViewController.h; sourceTree = "<group>"; };
 		BEF55D811A3A9090004BB443 /* DXDetailImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXDetailImageViewController.m; sourceTree = "<group>"; };
+		CBC8E0FE1C0C318300EE75E6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 				BE155B051A37F0BD008486DA /* HomeViewController.h */,
 				BE155B061A37F0BD008486DA /* HomeViewController.m */,
 				BE7FCA9D1A37E782005C64F0 /* Images.xcassets */,
+				CBC8E0FE1C0C318300EE75E6 /* LaunchScreen.storyboard */,
 				BE7FCA921A37E782005C64F0 /* Supporting Files */,
 			);
 			path = DXPhotoSelectBrowser;
@@ -178,7 +181,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DX;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = xiekw;
 			};
 			buildConfigurationList = BE7FCA831A37E782005C64F0 /* Build configuration list for PBXProject "DXPhotoSelectBrowser" */;
@@ -204,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE640A8E1A399BFB00761C38 /* DXImagePickerImage.bundle in Resources */,
+				CBC8E0FF1C0C318300EE75E6 /* LaunchScreen.storyboard in Resources */,
 				BE7FCA961A37E782005C64F0 /* InfoPlist.strings in Resources */,
 				BE7FCA9E1A37E782005C64F0 /* Images.xcassets in Resources */,
 			);
@@ -260,6 +264,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -327,8 +332,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DXPhotoSelectBrowser/DXPhotoSelectBrowser-Prefix.pch";
 				INFOPLIST_FILE = "DXPhotoSelectBrowser/DXPhotoSelectBrowser-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "Modudu.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "30b76c5d-c705-449d-8e63-e4eb355ae915";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -344,8 +349,8 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DXPhotoSelectBrowser/DXPhotoSelectBrowser-Prefix.pch";
 				INFOPLIST_FILE = "DXPhotoSelectBrowser/DXPhotoSelectBrowser-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "Modudu.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

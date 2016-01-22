@@ -276,11 +276,18 @@ static NSString * const CameraButton = @"CameraButton";
 
 - (void)_showCamera
 {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:picker animated:YES completion:nil];
+    if ([self.delegate respondsToSelector:@selector(dx_imagePickerControllerDidPushCameraButton:)]) {
+        [self.delegate dx_imagePickerControllerDidPushCameraButton:self];
+        return;
+    }
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:picker animated:YES completion:nil];
+    }
 }
 
 - (void)_addSelectedAsset:(ALAsset *)asset
@@ -331,6 +338,7 @@ static NSString * const CameraButton = @"CameraButton";
         self.selectedAssets = [NSMutableArray array];
         self.selectedOrderMap = [NSMutableDictionary dictionary];
         self.themeBlack = YES;
+        self.checkMark = YES;
         self.maxSelectedCount = -1;
     
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_reloadCurrentAlbum:) name:ALAssetsLibraryChangedNotification object:nil];
@@ -376,11 +384,18 @@ static NSString * const CameraButton = @"CameraButton";
     return mArray;
 }
 
+- (void)didTakePhoto:(UIImage *)image
+{
+    _captureImage = image;
+    
+    [self _done];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self _loadAssets];
 
-    self.themeColor = self.themeColor ? : [UIColor colorWithRed:0.06 green:0.51 blue:1.00 alpha:1.00];
+    self.themeColor = self.themeColor ? : [UIColor colorWithRed:26.0f/255.0f green:188.0f/255.0f blue:156.0f/255.0f alpha:1.0f];
 
     
     UIBarStyle barStyle;
@@ -398,8 +413,8 @@ static NSString * const CameraButton = @"CameraButton";
     }
     
     self.navigationController.navigationBar.barStyle = barStyle;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStylePlain target:self action:@selector(_dismiss)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", nil) style:UIBarButtonItemStylePlain target:self action:@selector(_done)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"キャンセル", nil) style:UIBarButtonItemStylePlain target:self action:@selector(_dismiss)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"決定", nil) style:UIBarButtonItemStylePlain target:self action:@selector(_done)];
     
     self.navigationItem.leftBarButtonItem.tintColor = self.navigationItem.rightBarButtonItem.tintColor = self.themeColor;
     
@@ -453,6 +468,14 @@ static NSString * const CameraButton = @"CameraButton";
 {
     DXPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CollectionCellId forIndexPath:indexPath];
     cell.tag = indexPath.row;
+    
+    //ここでセルのマーク指定を行いたい
+    if (self.checkMark) {
+        cell.checkMark = true;
+    } else {
+        cell.checkMark = false;
+    }
+    
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressCell:)];
     [cell addGestureRecognizer:longPress];
     
@@ -466,6 +489,7 @@ static NSString * const CameraButton = @"CameraButton";
     NSString *assetName = [asset defaultRepresentation].filename;
     cell.imageView.image = [UIImage imageWithCGImage:asset.thumbnail];
     cell.numberView.normalColor = self.themeColor;
+    cell.checkView.normalColor = self.themeColor;
     NSInteger supposeIndex = [self.selectedOrderMap[assetName] integerValue];
     cell.numberView.index = supposeIndex;
     
@@ -474,7 +498,6 @@ static NSString * const CameraButton = @"CameraButton";
 
 - (void)longPressCell:(UILongPressGestureRecognizer *)longPress
 {
-#warning here
     if (longPress.state == UIGestureRecognizerStateBegan) {
         NSString *currentAssetName = [self.currentAlbum valueForProperty:ALAssetsGroupPropertyName];
         NSArray *assets = self.albumsAssetMap[currentAssetName];
@@ -490,19 +513,19 @@ static NSString * const CameraButton = @"CameraButton";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self _isCameraRoll]) {
-        if (indexPath.row == 0) {
-            [collectionView deselectItemAtIndexPath:indexPath animated:NO];
-            [self _showCamera];
-            return;
-        }
-    }
-    
     if (self.selectedAssets.count == self.maxSelectedCount) {
         if ([self.delegate respondsToSelector:@selector(dx_imagePickerController:didReachMaxSelectedCount:)]) {
             [self.delegate dx_imagePickerController:self didReachMaxSelectedCount:self.selectedAssets.count
              ];
             [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+            return;
+        }
+    }
+    
+    if ([self _isCameraRoll]) {
+        if (indexPath.row == 0) {
+            [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+            [self _showCamera];
             return;
         }
     }
@@ -528,13 +551,13 @@ static NSString * const CameraButton = @"CameraButton";
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     // Try getting the edited image first. If it doesn't exist then you get the original image.
-    _captureImage = [info objectForKey:UIImagePickerControllerEditedImage];
-    if (!_captureImage) {
-        _captureImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *captureImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    if (!captureImage) {
+        captureImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     }
     
     [picker dismissViewControllerAnimated:NO completion:^{
-        [self _done];
+        [self didTakePhoto:captureImage];
     }];
 }
 
