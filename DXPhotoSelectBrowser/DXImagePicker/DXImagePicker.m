@@ -276,11 +276,18 @@ static NSString * const CameraButton = @"CameraButton";
 
 - (void)_showCamera
 {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:picker animated:YES completion:nil];
+    if ([self.delegate respondsToSelector:@selector(dx_imagePickerControllerDidPushCameraButton:)]) {
+        [self.delegate dx_imagePickerControllerDidPushCameraButton:self];
+        return;
+    }
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:picker animated:YES completion:nil];
+    }
 }
 
 - (void)_addSelectedAsset:(ALAsset *)asset
@@ -374,6 +381,13 @@ static NSString * const CameraButton = @"CameraButton";
         [mArray addObject:url];
     }
     return mArray;
+}
+
+- (void)didTakePhoto:(UIImage *)image
+{
+    _captureImage = image;
+    
+    [self _done];
 }
 
 - (void)viewDidLoad {
@@ -474,7 +488,6 @@ static NSString * const CameraButton = @"CameraButton";
 
 - (void)longPressCell:(UILongPressGestureRecognizer *)longPress
 {
-#warning here
     if (longPress.state == UIGestureRecognizerStateBegan) {
         NSString *currentAssetName = [self.currentAlbum valueForProperty:ALAssetsGroupPropertyName];
         NSArray *assets = self.albumsAssetMap[currentAssetName];
@@ -490,19 +503,19 @@ static NSString * const CameraButton = @"CameraButton";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self _isCameraRoll]) {
-        if (indexPath.row == 0) {
-            [collectionView deselectItemAtIndexPath:indexPath animated:NO];
-            [self _showCamera];
-            return;
-        }
-    }
-    
     if (self.selectedAssets.count == self.maxSelectedCount) {
         if ([self.delegate respondsToSelector:@selector(dx_imagePickerController:didReachMaxSelectedCount:)]) {
             [self.delegate dx_imagePickerController:self didReachMaxSelectedCount:self.selectedAssets.count
              ];
             [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+            return;
+        }
+    }
+    
+    if ([self _isCameraRoll]) {
+        if (indexPath.row == 0) {
+            [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+            [self _showCamera];
             return;
         }
     }
@@ -528,13 +541,13 @@ static NSString * const CameraButton = @"CameraButton";
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     // Try getting the edited image first. If it doesn't exist then you get the original image.
-    _captureImage = [info objectForKey:UIImagePickerControllerEditedImage];
-    if (!_captureImage) {
-        _captureImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *captureImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    if (!captureImage) {
+        captureImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     }
     
     [picker dismissViewControllerAnimated:NO completion:^{
-        [self _done];
+        [self didTakePhoto:captureImage];
     }];
 }
 
