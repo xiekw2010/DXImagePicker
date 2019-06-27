@@ -3,16 +3,16 @@ DXImagePicker
 
 Simple Imager picker which mimic Facebook's UI and UX
 
-###Demo
+### Demo
 
 
 ![gif](picker.gif)
 
-###Purpose
+### Purpose
 
 We wanna an image picker which contains both camera capture and albums selection(indexed) in a single view controller, just one that does not include push and present other stuff. Like facebook's app does! So, here comes this project.
 
-###How to use
+### How to use
 
 1. Drop DXImagePicker into your project and #import "DXImagePicker.h" somewhere you need
 2. In some your viewController method, doing this:
